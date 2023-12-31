@@ -27,16 +27,18 @@ export default function ContactForm() {
   const dispatch = useDispatch();
 
   const onSubmit = data => {
-    if (items.find(({ name }) => name === data.name)) {
+    const formattedName = data.name.toLowerCase(); // Convert the new contact's name to lowercase
+  
+    // Check if the contact with the same name (case insensitive) already exists
+    if (items.find(({ name }) => name.toLowerCase() === formattedName)) {
       alert(`${data.name} is already in contacts`);
       reset();
       return;
     }
-
+  
     dispatch(addContact(data));
-
     reset();
-  }; 
+  };
 
   return (
       < Container >
